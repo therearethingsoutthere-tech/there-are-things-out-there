@@ -21,6 +21,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      /* Animação inicial: fora da tela */
+      transform: translateY(-100%);
+      transition: transform 3s ease-out;
+    }
+
+    /* Barra animada para posição final */
+    .topo.ativo {
+      transform: translateY(0);
     }
 
     /* Texto animado */
@@ -44,16 +53,24 @@
 </head>
 
 <body>
-  <div class="topo">
+  <div class="topo" id="topo">
     <div class="titulo" id="titulo">BWCAA Company</div>
   </div>
 
   <script>
     window.onload = () => {
+      const topo = document.getElementById("topo");
       const titulo = document.getElementById("titulo");
+
+      // Animação da barra azul
+      setTimeout(() => {
+        topo.classList.add("ativo");
+      }, 100);
+
+      // Animação do texto (começa depois da barra)
       setTimeout(() => {
         titulo.classList.add("ativo");
-      }, 100);
+      }, 300); // pode ajustar o delay se quiser sincronizar
     };
   </script>
 </body>
