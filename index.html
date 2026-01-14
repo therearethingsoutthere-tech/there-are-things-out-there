@@ -48,13 +48,12 @@
       transform: translateY(0);
     }
 
-    /* Imagem animada descendo */
+    /* Imagem */
     .imagem-canto {
       position: fixed;
       top: 10px;
       left: 10px;
       width: 150px;
-      height: auto;
       transform: translateY(-100%);
       transition: transform 3s ease-out;
       z-index: 1000;
@@ -74,9 +73,29 @@
       padding: 10px 15px;
       cursor: pointer;
       border: none;
-      font-size: 16px;
+      font-size: 20px;
       z-index: 1100;
       border-radius: 5px;
+
+      /* NOVO */
+      transform: translateY(-100%);
+      transition: 
+        transform 3s ease-out,
+        background 0.3s ease;
+    }
+
+    .botao-menu.ativo {
+      transform: translateY(0);
+    }
+
+    /* Animação do símbolo */
+    .botao-menu span {
+      display: inline-block;
+      transition: transform 0.4s ease;
+    }
+
+    .botao-menu.aberto span {
+      transform: rotate(90deg);
     }
 
     /* Menu lateral */
@@ -87,24 +106,20 @@
       width: 250px;
       height: 100%;
       background-color: #1E1E1E;
-      color: white;
       padding-top: 60px;
 
-      /* NOVO: animação descendo junto com a barra */
       transform: translateY(-100%);
-      transition: 
+      transition:
         left 0.5s ease,
         transform 3s ease-out;
 
       z-index: 1050;
     }
 
-    /* Descida inicial */
     .menu-lateral.ativo {
       transform: translateY(0);
     }
 
-    /* Abertura lateral */
     .menu-lateral.aberto {
       left: 0;
     }
@@ -112,10 +127,9 @@
     .menu-lateral a {
       display: block;
       padding: 15px 25px;
-      text-decoration: none;
       color: white;
+      text-decoration: none;
       font-size: 18px;
-      transition: background 0.3s;
     }
 
     .menu-lateral a:hover {
@@ -129,9 +143,12 @@
     <div class="titulo" id="titulo">BWCAA Company</div>
   </div>
 
-  <img src="BWCAA-removebg-preview.png" alt="BWCAA Company" class="imagem-canto" id="imagem">
+  <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
-  <button class="botao-menu" id="botao-menu">☰ Menu</button>
+  <!-- Botão menu com span -->
+  <button class="botao-menu" id="botao-menu">
+    <span>☰</span>
+  </button>
 
   <div class="menu-lateral" id="menu-lateral">
     <a href="#">O que é a BWCAA</a>
@@ -147,21 +164,26 @@
       const botaoMenu = document.getElementById("botao-menu");
       const menuLateral = document.getElementById("menu-lateral");
 
-      // Barra, imagem e menu descem juntos
+      // Animações iniciais
       setTimeout(() => {
         topo.classList.add("ativo");
         imagem.classList.add("ativo");
         menuLateral.classList.add("ativo");
+        botaoMenu.classList.add("ativo");
       }, 100);
 
-      // Texto
       setTimeout(() => {
         titulo.classList.add("ativo");
       }, 300);
 
-      // Abrir/fechar menu
+      // Menu toggle
       botaoMenu.onclick = () => {
         menuLateral.classList.toggle("aberto");
+        botaoMenu.classList.toggle("aberto");
+
+        // troca símbolo
+        const span = botaoMenu.querySelector("span");
+        span.textContent = menuLateral.classList.contains("aberto") ? "✖" : "☰";
       };
     };
   </script>
