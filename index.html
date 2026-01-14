@@ -12,7 +12,6 @@
       background-color: white;
       overflow-x: hidden;
       font-family: Arial, sans-serif;
-      scroll-behavior: smooth;
     }
 
     .topo {
@@ -120,20 +119,12 @@
     <span>☰</span>
   </button>
 
-  <!-- MENU CLICÁVEL -->
+  <!-- MENU COM LINKS PARA OUTRAS PÁGINAS -->
   <div class="menu-lateral" id="menu-lateral">
-    <a href="#sobre" class="link-menu">O que é a BWCAA</a>
-    <a href="#funcionarios" class="link-menu">Área de Funcionários</a>
-    <a href="#historia" class="link-menu">História da Empresa</a>
+    <a href="sobre.html">O que é a BWCAA</a>
+    <a href="funcionarios.html">Área de Funcionários</a>
+    <a href="historia.html">História da Empresa</a>
   </div>
-
-  <!-- ⚠️ SUAS SEÇÕES JÁ EXISTENTES -->
-  <!-- Exemplo (não precisa criar se já tiver): -->
-  <!--
-  <section id="sobre"></section>
-  <section id="funcionarios"></section>
-  <section id="historia"></section>
-  -->
 
   <script>
     window.onload = () => {
@@ -142,7 +133,6 @@
       const imagem = document.getElementById("imagem");
       const botaoMenu = document.getElementById("botao-menu");
       const menuLateral = document.getElementById("menu-lateral");
-      const linksMenu = document.querySelectorAll(".link-menu");
 
       setTimeout(() => {
         topo.classList.add("ativo");
@@ -161,15 +151,6 @@
         botaoMenu.querySelector("span").textContent =
           menuLateral.classList.contains("aberto") ? "✖" : "☰";
       };
-
-      /* FECHA MENU AO CLICAR EM UMA ABA */
-      linksMenu.forEach(link => {
-        link.addEventListener("click", () => {
-          menuLateral.classList.remove("aberto");
-          botaoMenu.classList.remove("aberto");
-          botaoMenu.querySelector("span").textContent = "☰";
-        });
-      });
     };
   </script>
 
