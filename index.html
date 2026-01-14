@@ -17,28 +17,17 @@
     .topo {
       height: 30%;
       background-color: #00008B;
-
       display: flex;
       justify-content: center;
       align-items: center;
 
-      /* Animação inicial: fora da tela */
-      transform: translateY(-100%);
-      transition: transform 3s ease-out;
+      transform: translateY(-100%); /* fora da tela inicialmente */
+      transition: transform 3s ease-out; /* mesma velocidade da animação */
     }
 
-    /* Barra animada para posição final */
     .topo.ativo {
-      transform: translateY(0);
+      transform: translateY(0); /* posição final */
     }
-.imagem-canto {
-  position: fixed; /* fixa a imagem na tela */
-  top: 10px;       /* distância do topo */
-  left: 10px;      /* distância da esquerda */
-  width: 350px;    /* ajuste o tamanho que quiser */
-  height: auto;    /* mantém proporção */
-  z-index: 1000;   /* garante que fique acima de outros elementos */
-}
 
     /* Texto animado */
     .titulo {
@@ -57,6 +46,23 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Imagem animada descendo junto com a barra */
+    .imagem-canto {
+      position: fixed;
+      top: 10px;           /* posição inicial antes de animar */
+      left: 10px;
+      width: 150px;
+      height: auto;
+
+      transform: translateY(-100%); /* fora da tela inicialmente */
+      transition: transform 3s ease-out; /* mesma velocidade que a barra */
+      z-index: 1000;
+    }
+
+    .imagem-canto.ativo {
+      transform: translateY(0); /* desce para a posição final */
+    }
   </style>
 </head>
 
@@ -64,22 +70,25 @@
   <div class="topo" id="topo">
     <div class="titulo" id="titulo">BWCAA Company</div>
   </div>
-<img src="BWCAA-removebg-preview.png" alt="BWCAA Company" class="imagem-canto">
+
+  <img src="BWCAA-removebg-preview.png" alt="BWCAA Company" class="imagem-canto" id="imagem">
 
   <script>
     window.onload = () => {
       const topo = document.getElementById("topo");
       const titulo = document.getElementById("titulo");
+      const imagem = document.getElementById("imagem");
 
       // Animação da barra azul
       setTimeout(() => {
         topo.classList.add("ativo");
+        imagem.classList.add("ativo"); // anima a imagem ao mesmo tempo
       }, 100);
 
-      // Animação do texto (começa depois da barra)
+      // Animação do texto (começa depois da barra e da imagem)
       setTimeout(() => {
         titulo.classList.add("ativo");
-      }, 300); // pode ajustar o delay se quiser sincronizar
+      }, 300);
     };
   </script>
 </body>
