@@ -9,7 +9,7 @@
       margin: 0;
       width: 100%;
       height: 100%;
-      background-color: #0a1a2f; /* azul escuro */
+      background-color: #0a1a2f;
       overflow: hidden;
 
       display: flex;
@@ -18,16 +18,35 @@
     }
 
     .titulo {
-      margin-top: 20vh; /* posição mais pra cima */
+      margin-top: 20vh;
       color: white;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 48px;
       font-weight: bold;
       letter-spacing: 2px;
 
-      animation: descer 3s ease-out forwards;
+      opacity: 0;
+      transform: translateY(-120px);
+      transition: transform 3s ease-out, opacity 3s ease-out;
     }
 
-    @keyframes descer {
-      from {
-        transform: translateY(-100px);
+    .titulo.ativo {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="titulo" id="titulo">BWCAA Company</div>
+
+  <script>
+    window.onload = () => {
+      const titulo = document.getElementById("titulo");
+      setTimeout(() => {
+        titulo.classList.add("ativo");
+      }, 100);
+    };
+  </script>
+</body>
+</html>
