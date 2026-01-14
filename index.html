@@ -12,32 +12,25 @@
       background-color: white;
       overflow-x: hidden;
       font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
     }
 
-    /* Barra azul de cima */
     .topo {
       height: 30%;
       background-color: #00008B;
       display: flex;
       justify-content: center;
       align-items: center;
-
       transform: translateY(-100%);
       transition: transform 3s ease-out;
     }
 
-    .topo.ativo {
-      transform: translateY(0);
-    }
+    .topo.ativo { transform: translateY(0); }
 
-    /* Texto animado */
     .titulo {
       color: white;
-      font-family: brunson;
       font-size: 80px;
       font-weight: bold;
-      letter-spacing: 3px;
-
       opacity: 0;
       transform: translateY(-120px);
       transition: transform 3s ease-out, opacity 3s ease-out;
@@ -48,7 +41,6 @@
       transform: translateY(0);
     }
 
-    /* Imagem */
     .imagem-canto {
       position: fixed;
       top: 10px;
@@ -59,11 +51,8 @@
       z-index: 1000;
     }
 
-    .imagem-canto.ativo {
-      transform: translateY(0);
-    }
+    .imagem-canto.ativo { transform: translateY(0); }
 
-    /* Botão menu */
     .botao-menu {
       position: fixed;
       top: 20px;
@@ -71,34 +60,24 @@
       background-color: #00008B;
       color: white;
       padding: 10px 15px;
-      cursor: pointer;
-      border: none;
       font-size: 20px;
-      z-index: 1100;
+      border: none;
+      cursor: pointer;
       border-radius: 5px;
-
-      /* NOVO */
+      z-index: 1100;
       transform: translateY(-100%);
-      transition: 
-        transform 3s ease-out,
-        background 0.3s ease;
+      transition: transform 3s ease-out;
     }
 
-    .botao-menu.ativo {
-      transform: translateY(0);
-    }
+    .botao-menu.ativo { transform: translateY(0); }
 
-    /* Animação do símbolo */
     .botao-menu span {
       display: inline-block;
       transition: transform 0.4s ease;
     }
 
-    .botao-menu.aberto span {
-      transform: rotate(90deg);
-    }
+    .botao-menu.aberto span { transform: rotate(90deg); }
 
-    /* Menu lateral */
     .menu-lateral {
       position: fixed;
       top: 0;
@@ -107,22 +86,13 @@
       height: 100%;
       background-color: #1E1E1E;
       padding-top: 60px;
-
       transform: translateY(-100%);
-      transition:
-        left 0.5s ease,
-        transform 3s ease-out;
-
+      transition: left 0.5s ease, transform 3s ease-out;
       z-index: 1050;
     }
 
-    .menu-lateral.ativo {
-      transform: translateY(0);
-    }
-
-    .menu-lateral.aberto {
-      left: 0;
-    }
+    .menu-lateral.ativo { transform: translateY(0); }
+    .menu-lateral.aberto { left: 0; }
 
     .menu-lateral a {
       display: block;
@@ -139,22 +109,31 @@
 </head>
 
 <body>
+
   <div class="topo" id="topo">
     <div class="titulo" id="titulo">BWCAA Company</div>
   </div>
 
   <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
-  <!-- Botão menu com span -->
   <button class="botao-menu" id="botao-menu">
     <span>☰</span>
   </button>
 
+  <!-- MENU CLICÁVEL -->
   <div class="menu-lateral" id="menu-lateral">
-    <a href="#">O que é a BWCAA</a>
-    <a href="#">Área de Funcionários</a>
-    <a href="#">História da Empresa</a>
+    <a href="#sobre" class="link-menu">O que é a BWCAA</a>
+    <a href="#funcionarios" class="link-menu">Área de Funcionários</a>
+    <a href="#historia" class="link-menu">História da Empresa</a>
   </div>
+
+  <!-- ⚠️ SUAS SEÇÕES JÁ EXISTENTES -->
+  <!-- Exemplo (não precisa criar se já tiver): -->
+  <!--
+  <section id="sobre"></section>
+  <section id="funcionarios"></section>
+  <section id="historia"></section>
+  -->
 
   <script>
     window.onload = () => {
@@ -163,8 +142,8 @@
       const imagem = document.getElementById("imagem");
       const botaoMenu = document.getElementById("botao-menu");
       const menuLateral = document.getElementById("menu-lateral");
+      const linksMenu = document.querySelectorAll(".link-menu");
 
-      // Animações iniciais
       setTimeout(() => {
         topo.classList.add("ativo");
         imagem.classList.add("ativo");
@@ -176,16 +155,23 @@
         titulo.classList.add("ativo");
       }, 300);
 
-      // Menu toggle
       botaoMenu.onclick = () => {
         menuLateral.classList.toggle("aberto");
         botaoMenu.classList.toggle("aberto");
-
-        // troca símbolo
-        const span = botaoMenu.querySelector("span");
-        span.textContent = menuLateral.classList.contains("aberto") ? "✖" : "☰";
+        botaoMenu.querySelector("span").textContent =
+          menuLateral.classList.contains("aberto") ? "✖" : "☰";
       };
+
+      /* FECHA MENU AO CLICAR EM UMA ABA */
+      linksMenu.forEach(link => {
+        link.addEventListener("click", () => {
+          menuLateral.classList.remove("aberto");
+          botaoMenu.classList.remove("aberto");
+          botaoMenu.querySelector("span").textContent = "☰";
+        });
+      });
     };
   </script>
+
 </body>
 </html>
