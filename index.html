@@ -11,17 +11,21 @@
       height: 100%;
       background-color: #000080;
       overflow: hidden;
+    }
 
+    .topo {
+      height: 30%;
+      background-color: #1e90ff;
+    }
+
+    .conteudo {
+      height: 70%;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
     }
-    .topo {height: 30%;
-           background-color: #1e90ff;
-          }
 
     .titulo {
-      margin-top: 20vh;
       color: white;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 60px;
@@ -41,7 +45,11 @@
 </head>
 
 <body>
-  <div class="titulo" id="titulo">BWCAA Company</div>
+  <div class="topo"></div>
+
+  <div class="conteudo">
+    <div class="titulo" id="titulo">BWCAA Company</div>
+  </div>
 
   <script>
     window.onload = () => {
