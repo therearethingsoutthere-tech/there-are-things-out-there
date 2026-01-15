@@ -2,77 +2,62 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BWCAA Company</title>
 
 <style>
-.conteudo-inicial {
-  padding: 60px 80px;
-  background-color: white;
-
-  opacity: 0;
-  animation: fadeInTexto 2s ease forwards;
-  animation-delay: 1.5s; /* espera a animação do topo */
-}
-
-@keyframes fadeInTexto {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* RESET E BASE */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html, body {
-  margin: 0;
   width: 100%;
   height: 100%;
+  font-family: Arial, sans-serif;
   background-color: white;
   overflow-x: hidden;
-  font-family: Arial, sans-serif;
 }
 
 /* TOPO */
 .topo {
-  height: 30%;
+  height: 40vh; /* altura proporcional à tela */
+  min-height: 250px;
   background-color: #00008B;
   display: flex;
   justify-content: center;
   align-items: center;
   transform: translateY(-100%);
-  transition: transform 3s ease-out;
+  transition: transform 2s ease-out;
 }
-.topo.ativo { transform: translateY(0); }
 
 /* TÍTULO */
 .titulo {
   color: white;
-  font-size: 80px;
+  font-size: clamp(36px, 8vw, 80px); /* responsivo entre 36px e 80px */
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   opacity: 0;
   transform: translateY(-120px);
-  transition: transform 3s ease-out, opacity 3s ease-out;
+  transition: transform 2s ease-out, opacity 2s ease-out;
   text-transform: uppercase;
-}
-.titulo.ativo {
-  opacity: 1;
-  transform: translateY(0);
+  text-align: center;
+  padding: 0 10px;
 }
 
-/* IMAGEM */
+/* IMAGEM NO CANTO */
 .imagem-canto {
   position: fixed;
   top: 10px;
   left: 10px;
-  width: 150px;
+  width: 120px;
+  max-width: 25%;
   transform: translateY(-100%);
-  transition: transform 3s ease-out;
+  transition: transform 2s ease-out;
   z-index: 1000;
 }
-.imagem-canto.ativo { transform: translateY(0); }
 
 /* BOTÃO MENU */
 .botao-menu {
@@ -84,26 +69,27 @@ html, body {
   padding: 10px 15px;
   cursor: pointer;
   border: none;
-  font-size: 20px;
+  font-size: clamp(16px, 4vw, 22px);
   z-index: 1100;
   border-radius: 5px;
   transform: translateY(-100%);
-  transition: transform 3s ease-out;
+  transition: transform 2s ease-out;
 }
-.botao-menu.ativo { transform: translateY(0); }
 
-/* MENU */
+/* MENU LATERAL */
 .menu-lateral {
   position: fixed;
   top: 0;
   left: -250px;
   width: 250px;
+  max-width: 70%;
   height: 100%;
   background-color: #1E1E1E;
   padding-top: 60px;
   transition: left 0.5s ease;
   z-index: 1050;
 }
+
 .menu-lateral.aberto { left: 0; }
 
 .menu-lateral a {
@@ -111,26 +97,55 @@ html, body {
   padding: 15px 25px;
   color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: clamp(14px, 4vw, 18px);
   cursor: pointer;
 }
+
 .menu-lateral a:hover {
   background-color: #00008B;
 }
 
 /* CONTEÚDO INICIAL */
 .conteudo-inicial {
-  padding: 60px 80px;
+  padding: 50px 10%;
   background-color: white;
+  opacity: 0;
+  animation: fadeInTexto 2s ease forwards;
+  animation-delay: 1.5s;
 }
 
 .conteudo-inicial p {
   max-width: 1000px;
   margin: auto;
-  font-size: 18px;
+  font-size: clamp(14px, 2vw, 18px);
   line-height: 1.7;
   color: #222;
   text-align: justify;
+}
+
+/* ANIMAÇÃO TEXTO */
+@keyframes fadeInTexto {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CLASSES ATIVAS */
+.topo.ativo { transform: translateY(0); }
+.titulo.ativo { opacity: 1; transform: translateY(0); }
+.imagem-canto.ativo { transform: translateY(0); }
+.botao-menu.ativo { transform: translateY(0); }
+
+/* RESPONSIVO ADICIONAL */
+@media (max-width: 600px) {
+  .topo { height: 30vh; }
+  .conteudo-inicial { padding: 30px 5%; }
+  .imagem-canto { width: 80px; }
 }
 </style>
 </head>
@@ -189,7 +204,7 @@ const botaoMenu = document.getElementById("botao-menu");
 const menu = document.getElementById("menu");
 
 /* ANIMAÇÕES */
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     topo.classList.add("ativo");
     imagem.classList.add("ativo");
@@ -199,7 +214,7 @@ window.onload = () => {
   setTimeout(() => {
     titulo.classList.add("ativo");
   }, 300);
-};
+});
 
 /* MENU */
 botaoMenu.onclick = () => {
@@ -251,6 +266,7 @@ function abrirFuncionarios() {
             font-family: Arial;
             font-size: 60px;
             font-weight: bold;
+            text-align: center;
           }
         </style>
       </head>
