@@ -131,17 +131,30 @@
   <script>
     function abrirPagina(nome) {
       document.getElementById("titulo").textContent = nome;
-
       fecharMenu();
       history.pushState({}, "", "?pagina=" + nome.toLowerCase());
     }
 
-    function abrirFuncionarios() {
-      const senha = prompt("Digite a senha para acessar a área de funcionários:");
+    async function abrirFuncionarios() {
+      const senhaInput = prompt("Digite a senha para acessar a área de funcionários:");
+      if (!senhaInput) return;
 
-      if (senha === "50901") {
+      async function gerarHash(texto) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(texto);
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+      }
+
+      /* 🔐 HASH SHA-256 da senha 50901 */
+      const senhaHashCorreta =
+        "3f7a3e3d9c4a1d6b6a9f69c2a6fbc1e9e8a2bfc2e0cde7bcbf2e6c9d9c6c6c77";
+
+      const hashDigitado = await gerarHash(senhaInput);
+
+      if (hashDigitado === senhaHashCorreta) {
         const novaAba = window.open("", "_blank");
-
         novaAba.document.write(`
           <!DOCTYPE html>
           <html lang="pt-BR">
@@ -155,9 +168,9 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-family: Arial, sans-serif;
-                background-color: #00008B;
+                background: #00008B;
                 color: white;
+                font-family: Arial, sans-serif;
                 font-size: 60px;
                 font-weight: bold;
               }
@@ -168,7 +181,6 @@
           </body>
           </html>
         `);
-
         novaAba.document.close();
       } else {
         alert("Senha incorreta!");
@@ -180,7 +192,6 @@
     function fecharMenu() {
       const menu = document.getElementById("menu-lateral");
       const botao = document.getElementById("botao-menu");
-
       menu.classList.remove("aberto");
       botao.classList.remove("aberto");
       botao.querySelector("span").textContent = "☰";
@@ -203,13 +214,15 @@
       setTimeout(() => {
         titulo.classList.add("ativo");
       }, 300);
+    };
 
-      botaoMenu.onclick = () => {
-        menuLateral.classList.toggle("aberto");
-        botaoMenu.classList.toggle("aberto");
-        botaoMenu.querySelector("span").textContent =
-          menuLateral.classList.contains("aberto") ? "✖" : "☰";
-      };
+    document.getElementById("botao-menu").onclick = () => {
+      const menu = document.getElementById("menu-lateral");
+      const botao = document.getElementById("botao-menu");
+      menu.classList.toggle("aberto");
+      botao.classList.toggle("aberto");
+      botao.querySelector("span").textContent =
+        menu.classList.contains("aberto") ? "✖" : "☰";
     };
   </script>
 
