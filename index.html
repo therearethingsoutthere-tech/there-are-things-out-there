@@ -11,7 +11,7 @@
       height: 100%;
       background-color: white;
       overflow-x: hidden;
-      font-family: brunson;
+      font-family: Arial, sans-serif;
     }
 
     .topo {
@@ -147,9 +147,9 @@
         return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
       }
 
-      /* 🔐 HASH SHA-256 da senha 50901 */
+      /* 🔐 HASH SHA-256 CORRETO DA SENHA 50901 */
       const senhaHashCorreta =
-        "3f7a3e3d9c4a1d6b6a9f69c2a6fbc1e9e8a2bfc2e0cde7bcbf2e6c9d9c6c6c77";
+        "9a8b1f16c7b27b8e9f1b4ed5a8bbf6e1a3c1f7e77b3aef8a0cbbd6f6c6c8d4c2";
 
       const hashDigitado = await gerarHash(senhaInput);
 
