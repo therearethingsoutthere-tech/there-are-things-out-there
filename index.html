@@ -11,7 +11,7 @@ html, body {
   height: 100%;
   background-color: white;
   overflow-x: hidden;
-  font-family: branson;
+  font-family: Arial, sans-serif;
 }
 
 /* TOPO */
@@ -152,22 +152,24 @@ function fecharMenu() {
   botaoMenu.textContent = "☰";
 }
 
-/* 🔐 VERIFICAÇÃO */
+/* 🔐 VERIFICAÇÃO (SEM NÚMERO ERRADO) */
 function abrirFuncionarios() {
   const entrada = prompt("Digite a senha:");
   if (!entrada) return;
 
-  let soma = 0;
-  for (let i = 0; i < entrada.length; i++) {
-    soma += entrada.charCodeAt(i) * (i + 5);
+  // função de verificação
+  function gerarValor(texto) {
+    let v = 0;
+    for (let i = 0; i < texto.length; i++) {
+      v += texto.charCodeAt(i) * (i + 7);
+    }
+    return (v ^ 4096) + 123;
   }
 
-  soma = (soma ^ 2048) + 77;
+  // valor CORRETO gerado a partir da senha real
+  const valorCorreto = gerarValor("50901");
 
-  // ESTE VALOR FOI CALCULADO PARA A SENHA 50901
-  const chaveFinal = 23877;
-
-  if (soma === chaveFinal) {
+  if (gerarValor(entrada) === valorCorreto) {
     const aba = window.open("", "_blank");
     aba.document.write(`
       <!DOCTYPE html>
