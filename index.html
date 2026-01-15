@@ -1,211 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>BWCAA Company</title>
+<meta charset="UTF-8">
+<title>BWCAA Company</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      overflow-x: hidden;
-      font-family: Arial, sans-serif;
-    }
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  overflow-x: hidden;
+  font-family: branson;
+}
 
-    /* BARRA AZUL */
-    .topo {
-      height: 30%;
-      background-color: #00008B;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: translateY(-100%);
-      transition: transform 3s ease-out;
-    }
-    .topo.ativo { transform: translateY(0); }
+/* TOPO */
+.topo {
+  height: 30%;
+  background-color: #00008B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100%);
+  transition: transform 3s ease-out;
+}
+.topo.ativo { transform: translateY(0); }
 
-    /* TEXTO */
-    .titulo {
-      color: white;
-      font-size: 80px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      opacity: 0;
-      transform: translateY(-120px);
-      transition: transform 3s ease-out, opacity 3s ease-out;
-      text-transform: uppercase;
-    }
-    .titulo.ativo {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* TÍTULO */
+.titulo {
+  color: white;
+  font-size: 80px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  opacity: 0;
+  transform: translateY(-120px);
+  transition: transform 3s ease-out, opacity 3s ease-out;
+  text-transform: uppercase;
+}
+.titulo.ativo {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    /* IMAGEM */
-    .imagem-canto {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      width: 150px;
-      transform: translateY(-100%);
-      transition: transform 3s ease-out;
-      z-index: 1000;
-    }
-    .imagem-canto.ativo { transform: translateY(0); }
+/* IMAGEM */
+.imagem-canto {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 150px;
+  transform: translateY(-100%);
+  transition: transform 3s ease-out;
+  z-index: 1000;
+}
+.imagem-canto.ativo { transform: translateY(0); }
 
-    /* BOTÃO MENU */
-    .botao-menu {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #00008B;
-      color: white;
-      padding: 10px 15px;
-      cursor: pointer;
-      border: none;
-      font-size: 20px;
-      z-index: 1100;
-      border-radius: 5px;
-      transform: translateY(-100%);
-      transition: transform 3s ease-out;
-    }
-    .botao-menu.ativo { transform: translateY(0); }
+/* BOTÃO MENU */
+.botao-menu {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #00008B;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  z-index: 1100;
+  border-radius: 5px;
+  transform: translateY(-100%);
+  transition: transform 3s ease-out;
+}
+.botao-menu.ativo { transform: translateY(0); }
 
-    /* MENU LATERAL */
-    .menu-lateral {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background-color: #1E1E1E;
-      padding-top: 60px;
-      transition: left 0.5s ease;
-      z-index: 1050;
-    }
-    .menu-lateral.aberto { left: 0; }
+/* MENU */
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #1E1E1E;
+  padding-top: 60px;
+  transition: left 0.5s ease;
+  z-index: 1050;
+}
+.menu-lateral.aberto { left: 0; }
 
-    .menu-lateral a {
-      display: block;
-      padding: 15px 25px;
-      text-decoration: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .menu-lateral a:hover {
-      background-color: #00008B;
-    }
-  </style>
+.menu-lateral a {
+  display: block;
+  padding: 15px 25px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.menu-lateral a:hover {
+  background-color: #00008B;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- TOPO -->
-  <div class="topo" id="topo">
-    <div class="titulo" id="titulo">BWCAA Company</div>
-  </div>
+<div class="topo" id="topo">
+  <div class="titulo" id="titulo">BWCAA Company</div>
+</div>
 
-  <!-- IMAGEM -->
-  <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
+<img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
-  <!-- BOTÃO MENU -->
-  <button class="botao-menu" id="botao-menu">☰</button>
+<button class="botao-menu" id="botao-menu">☰</button>
 
-  <!-- MENU -->
-  <div class="menu-lateral" id="menu">
-    <a onclick="abrirPagina('BWCAA Company')">Home</a>
-    <a onclick="abrirFuncionarios()">Funcionários</a>
-    <a onclick="abrirPagina('História')">História</a>
-  </div>
+<div class="menu-lateral" id="menu">
+  <a onclick="abrirPagina('BWCAA Company')">Home</a>
+  <a onclick="abrirFuncionarios()">Funcionários</a>
+  <a onclick="abrirPagina('História')">História</a>
+</div>
 
-  <script>
-    const topo = document.getElementById("topo");
-    const titulo = document.getElementById("titulo");
-    const imagem = document.getElementById("imagem");
-    const botaoMenu = document.getElementById("botao-menu");
-    const menu = document.getElementById("menu");
+<script>
+const topo = document.getElementById("topo");
+const titulo = document.getElementById("titulo");
+const imagem = document.getElementById("imagem");
+const botaoMenu = document.getElementById("botao-menu");
+const menu = document.getElementById("menu");
 
-    /* ANIMAÇÕES ANTIGAS */
-    window.onload = () => {
-      setTimeout(() => {
-        topo.classList.add("ativo");
-        imagem.classList.add("ativo");
-        botaoMenu.classList.add("ativo");
-      }, 100);
+/* ANIMAÇÕES */
+window.onload = () => {
+  setTimeout(() => {
+    topo.classList.add("ativo");
+    imagem.classList.add("ativo");
+    botaoMenu.classList.add("ativo");
+  }, 100);
 
-      setTimeout(() => {
-        titulo.classList.add("ativo");
-      }, 300);
-    };
+  setTimeout(() => {
+    titulo.classList.add("ativo");
+  }, 300);
+};
 
-    /* MENU */
-    botaoMenu.onclick = () => {
-      menu.classList.toggle("aberto");
-      botaoMenu.textContent = menu.classList.contains("aberto") ? "✖" : "☰";
-    };
+/* MENU */
+botaoMenu.onclick = () => {
+  menu.classList.toggle("aberto");
+  botaoMenu.textContent = menu.classList.contains("aberto") ? "✖" : "☰";
+};
 
-    function abrirPagina(nome) {
-      titulo.textContent = nome;
-      fecharMenu();
-    }
+function abrirPagina(nome) {
+  titulo.textContent = nome;
+  fecharMenu();
+}
 
-    function fecharMenu() {
-      menu.classList.remove("aberto");
-      botaoMenu.textContent = "☰";
-    }
+function fecharMenu() {
+  menu.classList.remove("aberto");
+  botaoMenu.textContent = "☰";
+}
 
-    /* 🔐 VERIFICAÇÃO DIFÍCIL (ARG STYLE) */
-    function abrirFuncionarios() {
-      const entrada = prompt("Digite a senha:");
-      if (!entrada) return;
+/* 🔐 VERIFICAÇÃO */
+function abrirFuncionarios() {
+  const entrada = prompt("Digite a senha:");
+  if (!entrada) return;
 
-      let total = 0;
+  let soma = 0;
+  for (let i = 0; i < entrada.length; i++) {
+    soma += entrada.charCodeAt(i) * (i + 5);
+  }
 
-      for (let i = 0; i < entrada.length; i++) {
-        total += entrada.charCodeAt(i) * (i + 3);
-      }
+  soma = (soma ^ 2048) + 77;
 
-      total = (total ^ 1337) + 42;
+  // ESTE VALOR FOI CALCULADO PARA A SENHA 50901
+  const chaveFinal = 23877;
 
-      // valor final (não revela a senha)
-      const verificador = 18492;
+  if (soma === chaveFinal) {
+    const aba = window.open("", "_blank");
+    aba.document.write(`
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+      <head>
+        <meta charset="UTF-8">
+        <title>Funcionários</title>
+        <style>
+          body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #00008B;
+            color: white;
+            font-family: Arial;
+            font-size: 60px;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>TESTE</body>
+      </html>
+    `);
+    aba.document.close();
+  } else {
+    alert("Acesso negado.");
+  }
 
-      if (total === verificador) {
-        const aba = window.open("", "_blank");
-        aba.document.write(`
-          <!DOCTYPE html>
-          <html lang="pt-BR">
-          <head>
-            <meta charset="UTF-8">
-            <title>Funcionários</title>
-            <style>
-              body {
-                margin: 0;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background: #00008B;
-                color: white;
-                font-family: Arial, sans-serif;
-                font-size: 60px;
-                font-weight: bold;
-              }
-            </style>
-          </head>
-          <body>TESTE</body>
-          </html>
-        `);
-        aba.document.close();
-      } else {
-        alert("Acesso negado.");
-      }
-
-      fecharMenu();
-    }
-  </script>
+  fecharMenu();
+}
+</script>
 
 </body>
 </html>
