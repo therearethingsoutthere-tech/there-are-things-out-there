@@ -5,6 +5,26 @@
 <title>BWCAA Company</title>
 
 <style>
+.conteudo-inicial {
+  padding: 60px 80px;
+  background-color: white;
+
+  opacity: 0;
+  animation: fadeInTexto 2s ease forwards;
+  animation-delay: 1.5s; /* espera a animação do topo */
+}
+
+@keyframes fadeInTexto {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 html, body {
   margin: 0;
   width: 100%;
