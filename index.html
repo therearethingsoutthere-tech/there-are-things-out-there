@@ -1,113 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>BWCAA Company</title>
+  <meta charset="UTF-8">
+  <title>BWCAA Company</title>
 
-<style>
-html, body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  font-family: brunson;
-  overflow-x: hidden;
-}
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+    }
 
-/* TOPO */
-.topo {
-  height: 30%;
-  background-color: #00008B;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(-100%);
-  transition: transform 2s ease-out;
-}
-.topo.ativo { transform: translateY(0); }
+    /* BARRA AZUL */
+    .topo {
+      height: 30%;
+      background-color: #00008B;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-100%);
+      transition: transform 3s ease-out;
+    }
+    .topo.ativo { transform: translateY(0); }
 
-/* TÍTULO */
-.titulo {
-  color: white;
-  font-size: 80px;
-  font-weight: bold;
-  opacity: 0;
-  transform: translateY(-80px);
-  transition: 2s ease;
-}
-.titulo.ativo {
-  opacity: 1;
-  transform: translateY(0);
-}
+    /* TEXTO */
+    .titulo {
+      color: white;
+      font-size: 80px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      opacity: 0;
+      transform: translateY(-120px);
+      transition: transform 3s ease-out, opacity 3s ease-out;
+      text-transform: uppercase;
+    }
+    .titulo.ativo {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* IMAGEM */
-.imagem-canto {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 150px;
-  transform: translateY(-100%);
-  transition: 2s ease;
-}
-.imagem-canto.ativo { transform: translateY(0); }
+    /* IMAGEM */
+    .imagem-canto {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 150px;
+      transform: translateY(-100%);
+      transition: transform 3s ease-out;
+      z-index: 1000;
+    }
+    .imagem-canto.ativo { transform: translateY(0); }
 
-/* BOTÃO MENU */
-.botao-menu {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #00008B;
-  color: white;
-  border: none;
-  font-size: 24px;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  transform: translateY(-100%);
-  transition: 2s ease;
-}
-.botao-menu.ativo { transform: translateY(0); }
-
-/* MENU */
-.menu-lateral {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100%;
-  background: #1E1E1E;
-  padding-top: 60px;
-  transition: 0.5s;
-}
-.menu-lateral.aberto { left: 0; }
-
-.menu-lateral a {
-  display: block;
-  padding: 15px 25px;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-}
-.menu-lateral a:hover {
-  background: #00008B;
-}
-</style>
-</head>
-
-<body>
-
-<div class="topo" id="topo">
-  <div class="titulo" id="titulo">BWCAA Company</div>
-</div>
-
-<img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
-
-<button class="botao-menu" id="botao-menu">☰</button>
-
-<div class="menu-lateral" id="menu">
-  <a onclick="abrirPagina('BWCAA Company')">Home</a>
-  <a onclick="abrirFuncionarios()">Funcionários</a>
-  <a onclick="abrirPagina('História')">História</a>
-</div>
-
-<script>
-const topo = document.getElem
+    /* BOTÃO MENU */
+    .botao-menu {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #00008B;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      border: none;
+      font-size: 20px;
+      z-index: 1100;
+      border-radius: 5px;
+      transform: translateY(-100%);
+      transition: transform 3s ease-out;
+    }
+    .botao-menu.ativo { transform: translateY(0); }
