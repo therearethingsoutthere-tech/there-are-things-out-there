@@ -11,7 +11,7 @@
       height: 100%;
       background-color: white;
       overflow-x: hidden;
-      font-family: brunson;
+      font-family: Arial, sans-serif;
     }
 
     .topo {
@@ -121,27 +121,69 @@
     <span>☰</span>
   </button>
 
-  <!-- MENU SEM 404 -->
+  <!-- MENU -->
   <div class="menu-lateral" id="menu-lateral">
     <a onclick="abrirPagina('BWCAA Company')">Home</a>
-    <a onclick="abrirPagina('Funcionários')">Area de Funcionários</a>
-    <a onclick="abrirPagina('História')">História da Empresa</a>
+    <a onclick="abrirFuncionarios()">Funcionários</a>
+    <a onclick="abrirPagina('História')">História</a>
   </div>
 
   <script>
     function abrirPagina(nome) {
-      // muda o texto do título
       document.getElementById("titulo").textContent = nome;
 
-      // fecha menu
+      fecharMenu();
+      history.pushState({}, "", "?pagina=" + nome.toLowerCase());
+    }
+
+    function abrirFuncionarios() {
+      const senha = prompt("Digite a senha para acessar a área de funcionários:");
+
+      if (senha === "50901") {
+        const novaAba = window.open("", "_blank");
+
+        novaAba.document.write(`
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+          <head>
+            <meta charset="UTF-8">
+            <title>Funcionários</title>
+            <style>
+              body {
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #00008B;
+                color: white;
+                font-size: 60px;
+                font-weight: bold;
+              }
+            </style>
+          </head>
+          <body>
+            TESTE
+          </body>
+          </html>
+        `);
+
+        novaAba.document.close();
+      } else {
+        alert("Senha incorreta!");
+      }
+
+      fecharMenu();
+    }
+
+    function fecharMenu() {
       const menu = document.getElementById("menu-lateral");
       const botao = document.getElementById("botao-menu");
+
       menu.classList.remove("aberto");
       botao.classList.remove("aberto");
       botao.querySelector("span").textContent = "☰";
-
-      // muda URL (opcional, sem recarregar)
-      history.pushState({ pagina: nome }, "", "?pagina=" + nome.toLowerCase());
     }
 
     window.onload = () => {
@@ -168,13 +210,6 @@
         botaoMenu.querySelector("span").textContent =
           menuLateral.classList.contains("aberto") ? "✖" : "☰";
       };
-
-      // se abrir com ?pagina=...
-      const params = new URLSearchParams(window.location.search);
-      const pagina = params.get("pagina");
-      if (pagina) {
-        titulo.textContent = pagina.replace("-", " ");
-      }
     };
   </script>
 
