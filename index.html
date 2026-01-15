@@ -1,210 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>BWCAA Company</title>
+<meta charset="UTF-8">
+<title>BWCAA Company</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      overflow-x: hidden;
-      font-family: Arial, sans-serif;
-    }
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: brunson;
+  overflow-x: hidden;
+}
 
-    /* TOPO */
-    .topo {
-      height: 30%;
-      background-color: #00008B;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: translateY(-100%);
-      transition: transform 3s ease-out;
-    }
+/* TOPO */
+.topo {
+  height: 30%;
+  background-color: #00008B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100%);
+  transition: transform 2s ease-out;
+}
+.topo.ativo { transform: translateY(0); }
 
-    .topo.ativo { transform: translateY(0); }
+/* TÍTULO */
+.titulo {
+  color: white;
+  font-size: 80px;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(-80px);
+  transition: 2s ease;
+}
+.titulo.ativo {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .titulo {
-      color: white;
-      font-size: 80px;
-      font-weight: bold;
-      opacity: 0;
-      transform: translateY(-120px);
-      transition: transform 3s ease-out, opacity 3s ease-out;
-      text-transform: uppercase;
-    }
+/* IMAGEM */
+.imagem-canto {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 150px;
+  transform: translateY(-100%);
+  transition: 2s ease;
+}
+.imagem-canto.ativo { transform: translateY(0); }
 
-    .titulo.ativo {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* BOTÃO MENU */
+.botao-menu {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #00008B;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transform: translateY(-100%);
+  transition: 2s ease;
+}
+.botao-menu.ativo { transform: translateY(0); }
 
-    /* IMAGEM CANTO */
-    .imagem-canto {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      width: 150px;
-      transform: translateY(-100%);
-      transition: transform 3s ease-out;
-      z-index: 1000;
-    }
+/* MENU */
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: #1E1E1E;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+.menu-lateral.aberto { left: 0; }
 
-    .imagem-canto.ativo { transform: translateY(0); }
-
-    /* BOTÃO MENU */
-    .botao-menu {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #00008B;
-      color: white;
-      padding: 10px 15px;
-      font-size: 24px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      z-index: 1100;
-      transform: translateY(-100%);
-      transition: transform 3s ease-out;
-    }
-
-    .botao-menu.ativo { transform: translateY(0); }
-
-    /* MENU LATERAL */
-    .menu-lateral {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background-color: #1E1E1E;
-      padding-top: 60px;
-      transform: translateY(-100%);
-      transition: left 0.5s ease, transform 3s ease-out;
-      z-index: 1050;
-    }
-
-    .menu-lateral.ativo { transform: translateY(0); }
-    .menu-lateral.aberto { left: 0; }
-
-    .menu-lateral a {
-      display: block;
-      padding: 15px 25px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .menu-lateral a:hover { background-color: #00008B; }
-  </style>
+.menu-lateral a {
+  display: block;
+  padding: 15px 25px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.menu-lateral a:hover {
+  background: #00008B;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- TOPO -->
-  <div class="topo" id="topo">
-    <div class="titulo" id="titulo">BWCAA Company</div>
-  </div>
+<div class="topo" id="topo">
+  <div class="titulo" id="titulo">BWCAA Company</div>
+</div>
 
-  <!-- IMAGEM -->
-  <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
+<img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
-  <!-- BOTÃO MENU -->
-  <button class="botao-menu" id="botao-menu">☰</button>
+<button class="botao-menu" id="botao-menu">☰</button>
 
-  <!-- MENU LATERAL -->
-  <div class="menu-lateral" id="menu-lateral">
-    <a onclick="abrirPagina('BWCAA Company')">Home</a>
-    <a onclick="abrirFuncionarios()">Funcionários</a>
-    <a onclick="abrirPagina('História')">História</a>
-  </div>
+<div class="menu-lateral" id="menu">
+  <a onclick="abrirPagina('BWCAA Company')">Home</a>
+  <a onclick="abrirFuncionarios()">Funcionários</a>
+  <a onclick="abrirPagina('História')">História</a>
+</div>
 
-  <script>
-    // ELEMENTOS
-    const topo = document.getElementById("topo");
-    const titulo = document.getElementById("titulo");
-    const imagem = document.getElementById("imagem");
-    const botaoMenu = document.getElementById("botao-menu");
-    const menu = document.getElementById("menu-lateral");
-
-    // ABAS SIMPLES
-    function abrirPagina(nome) {
-      titulo.textContent = nome;
-      fecharMenu();
-    }
-
-    // FUNCIONÁRIOS COM SENHA
-    function abrirFuncionarios() {
-      const senha = prompt("Digite a senha:");
-      if (!senha) return;
-
-      const chave = String.fromCharCode(53,48,57,48,49); // 50901
-
-      if (senha === chave) {
-        const aba = window.open("", "_blank");
-        aba.document.write(`
-          <!DOCTYPE html>
-          <html lang="pt-BR">
-          <head>
-            <meta charset="UTF-8">
-            <title>Funcionários</title>
-            <style>
-              body {
-                margin: 0;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background: #00008B;
-                color: white;
-                font-family: Arial, sans-serif;
-                font-size: 60px;
-                font-weight: bold;
-              }
-            </style>
-          </head>
-          <body>TESTE</body>
-          </html>
-        `);
-        aba.document.close();
-      } else {
-        alert("Senha incorreta!");
-      }
-
-      fecharMenu();
-    }
-
-    // FECHAR MENU
-    function fecharMenu() {
-      menu.classList.remove("aberto");
-      botaoMenu.textContent = "☰";
-    }
-
-    // BOTÃO MENU
-    botaoMenu.onclick = () => {
-      menu.classList.toggle("aberto");
-      botaoMenu.textContent = menu.classList.contains("aberto") ? "✖" : "☰";
-    };
-
-    // ANIMAÇÕES AO CARREGAR
-    window.onload = () => {
-      setTimeout(() => {
-        topo.classList.add("ativo");
-        imagem.classList.add("ativo");
-        menu.classList.add("ativo");
-        botaoMenu.classList.add("ativo");
-      }, 100);
-
-      setTimeout(() => {
-        titulo.classList.add("ativo");
-      }, 300);
-    };
-  </script>
-
-</body>
-</html>
+<script>
+const topo = document.getElem
