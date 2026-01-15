@@ -6,24 +6,16 @@
   <title>BWCAA Company</title>
 
   <style>
-    .caixa {
-  width: 300px;
-  height: 200px;
-  background-color: #ccc; /* cinza */
-}
-    .caixa {
-  width: 300px;
-  height: 200px;
-  background-color: #ccc;
+    /* FONTE */
     @font-face {
-      font-family: "Brunson.zip";
+      font-family: "Brunson";
       src: url("fonts/Brunson-Regular.otf") format("opentype");
       font-weight: 400;
       font-style: normal;
     }
 
     @font-face {
-      font-family: "Brunson.zip";
+      font-family: "Brunson";
       src: url("fonts/Brunson-Bold.otf") format("opentype");
       font-weight: 700;
       font-style: normal;
@@ -39,7 +31,7 @@
     html, body {
       width: 100%;
       height: 100%;
-      font-family: Brunson.zip;
+      font-family: "Brunson", Arial, sans-serif;
       background-color: white;
       overflow-x: hidden;
     }
@@ -56,7 +48,6 @@
       transition: transform 2s ease-out;
     }
 
-    /* TÍTULO */
     .titulo {
       color: white;
       font-size: clamp(36px, 8vw, 80px);
@@ -70,7 +61,7 @@
       padding: 0 10px;
     }
 
-    /* IMAGEM */
+    /* IMAGEM CANTO */
     .imagem-canto {
       position: fixed;
       top: 10px;
@@ -99,7 +90,7 @@
       transition: transform 2s ease-out;
     }
 
-    /* MENU */
+    /* MENU LATERAL */
     .menu-lateral {
       position: fixed;
       top: 0;
@@ -113,9 +104,7 @@
       z-index: 1050;
     }
 
-    .menu-lateral.aberto {
-      left: 0;
-    }
+    .menu-lateral.aberto { left: 0; }
 
     .menu-lateral a {
       display: block;
@@ -126,48 +115,59 @@
       cursor: pointer;
     }
 
-    .menu-lateral a:hover {
-      background-color: #00008B;
+    .menu-lateral a:hover { background-color: #00008B; }
+
+    /* CONTEÚDO PRINCIPAL COM CAIXA AO LADO */
+    .conteudo-container {
+      display: flex;
+      flex-wrap: wrap; /* responsivo para celular */
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 50px 10%;
     }
 
-    /* CONTEÚDO */
     .conteudo-inicial {
-      padding: 50px 10%;
-      background-color: white;
+      max-width: 600px;
+      flex: 1;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
       opacity: 0;
       animation: fadeInTexto 2s ease forwards;
       animation-delay: 1.5s;
     }
 
     .conteudo-inicial p {
-      max-width: 1000px;
-      margin: auto;
       font-size: clamp(14px, 2vw, 18px);
       line-height: 1.7;
       color: #222;
       text-align: justify;
     }
 
-    @keyframes fadeInTexto {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .caixa {
+      width: 300px;
+      height: 200px;
+      background-color: #ccc; /* cinza */
+      border-radius: 10px;
+      flex-shrink: 0; /* mantém o tamanho */
     }
 
+    @keyframes fadeInTexto {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ANIMAÇÕES TOPO */
     .topo.ativo { transform: translateY(0); }
     .titulo.ativo { opacity: 1; transform: translateY(0); }
     .imagem-canto.ativo { transform: translateY(0); }
     .botao-menu.ativo { transform: translateY(0); }
 
-    @media (max-width: 600px) {
-      .topo { height: 30vh; }
-      .conteudo-inicial { padding: 30px 5%; }
-      .imagem-canto { width: 80px; }
+    /* RESPONSIVO */
+    @media (max-width: 800px) {
+      .conteudo-container { flex-direction: column; align-items: center; }
+      .caixa { width: 80%; height: 200px; }
     }
   </style>
 </head>
@@ -178,29 +178,32 @@
     <div class="titulo" id="titulo">BWCAA Company</div>
   </div>
 
-  <div class="conteudo-inicial">
-    <p>
-      BWCAA Corporation was established across the Americas, maintaining
-      operational presence in regions including Mexico, the United States,
-      Brazil, Chile, and Argentina.<br><br>
+  <div class="conteudo-container">
+    <div class="conteudo-inicial">
+      <p>
+        BWCAA Corporation was established across the Americas, maintaining
+        operational presence in regions including Mexico, the United States,
+        Brazil, Chile, and Argentina.<br><br>
 
-      The corporation was founded with the primary objective of overseeing,
-      controlling, and executing the disposal of specialized biological and
-      hazardous waste under strict regulatory, scientific, and security
-      protocols.<br><br>
+        The corporation was founded with the primary objective of overseeing,
+        controlling, and executing the disposal of specialized biological and
+        hazardous waste under strict regulatory, scientific, and security
+        protocols.<br><br>
 
-      All BWCAA corporate facilities containing residential, containment,
-      or classified operational sectors are designated as strictly restricted
-      areas. Access is granted exclusively to authorized personnel or individuals
-      operating under official governmental, military, or judicial mandate.<br><br>
+        All BWCAA corporate facilities containing residential, containment,
+        or classified operational sectors are designated as strictly restricted
+        areas. Access is granted exclusively to authorized personnel or individuals
+        operating under official governmental, military, or judicial mandate.<br><br>
 
-      Any unauthorized access or attempt to obtain restricted information
-      constitutes a violation of international regulations.
-    </p>
+        Any unauthorized access or attempt to obtain restricted information
+        constitutes a violation of international regulations.
+      </p>
+    </div>
+
+    <div class="caixa"></div>
   </div>
 
   <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
-
   <button class="botao-menu" id="botao-menu">☰</button>
 
   <div class="menu-lateral" id="menu">
@@ -223,9 +226,7 @@
         botaoMenu.classList.add("ativo");
       }, 100);
 
-      setTimeout(() => {
-        titulo.classList.add("ativo");
-      }, 300);
+      setTimeout(() => { titulo.classList.add("ativo"); }, 300);
     });
 
     botaoMenu.onclick = () => {
@@ -263,30 +264,34 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restricted Area</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #00008B;
-      color: white;
-      font-family: brunson.zip;
-      font-size: 60px;
-      font-weight: bold;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Restricted Area</title>
+<style>
+  body { 
+    margin: 0; 
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    background-color: #00008B; 
+    color: white; 
+    font-family: "Brunson", Arial, sans-serif;
+    font-size: 60px; 
+    font-weight: bold; 
+    text-align: center;
+  }
+  .caixa {
+    width: 300px;
+    height: 200px;
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+</style>
 </head>
 <body>
-  a
+  <div class="caixa"></div>
 </body>
 </html>
-<div class="caixa"></div>
         `);
         aba.document.close();
       } else {
