@@ -14,6 +14,7 @@
       font-family: Arial, sans-serif;
     }
 
+    /* TOPO */
     .topo {
       height: 30%;
       background-color: #00008B;
@@ -41,6 +42,7 @@
       transform: translateY(0);
     }
 
+    /* IMAGEM CANTO */
     .imagem-canto {
       position: fixed;
       top: 10px;
@@ -53,6 +55,7 @@
 
     .imagem-canto.ativo { transform: translateY(0); }
 
+    /* BOTÃO MENU */
     .botao-menu {
       position: fixed;
       top: 20px;
@@ -60,7 +63,7 @@
       background-color: #00008B;
       color: white;
       padding: 10px 15px;
-      font-size: 20px;
+      font-size: 24px;
       border: none;
       cursor: pointer;
       border-radius: 5px;
@@ -71,6 +74,7 @@
 
     .botao-menu.ativo { transform: translateY(0); }
 
+    /* MENU LATERAL */
     .menu-lateral {
       position: fixed;
       top: 0;
@@ -96,22 +100,24 @@
       cursor: pointer;
     }
 
-    .menu-lateral a:hover {
-      background-color: #00008B;
-    }
+    .menu-lateral a:hover { background-color: #00008B; }
   </style>
 </head>
 
 <body>
 
+  <!-- TOPO -->
   <div class="topo" id="topo">
     <div class="titulo" id="titulo">BWCAA Company</div>
   </div>
 
+  <!-- IMAGEM -->
   <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
+  <!-- BOTÃO MENU -->
   <button class="botao-menu" id="botao-menu">☰</button>
 
+  <!-- MENU LATERAL -->
   <div class="menu-lateral" id="menu-lateral">
     <a onclick="abrirPagina('BWCAA Company')">Home</a>
     <a onclick="abrirFuncionarios()">Funcionários</a>
@@ -119,18 +125,25 @@
   </div>
 
   <script>
+    // ELEMENTOS
+    const topo = document.getElementById("topo");
+    const titulo = document.getElementById("titulo");
+    const imagem = document.getElementById("imagem");
+    const botaoMenu = document.getElementById("botao-menu");
+    const menu = document.getElementById("menu-lateral");
+
+    // ABAS SIMPLES
     function abrirPagina(nome) {
-      document.getElementById("titulo").textContent = nome;
+      titulo.textContent = nome;
       fecharMenu();
     }
 
+    // FUNCIONÁRIOS COM SENHA
     function abrirFuncionarios() {
       const senha = prompt("Digite a senha:");
-
       if (!senha) return;
 
-      // 🔐 senha ofuscada (50901)
-      const chave = String.fromCharCode(53,48,57,48,49);
+      const chave = String.fromCharCode(53,48,57,48,49); // 50901
 
       if (senha === chave) {
         const aba = window.open("", "_blank");
@@ -138,3 +151,60 @@
           <!DOCTYPE html>
           <html lang="pt-BR">
           <head>
+            <meta charset="UTF-8">
+            <title>Funcionários</title>
+            <style>
+              body {
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #00008B;
+                color: white;
+                font-family: Arial, sans-serif;
+                font-size: 60px;
+                font-weight: bold;
+              }
+            </style>
+          </head>
+          <body>TESTE</body>
+          </html>
+        `);
+        aba.document.close();
+      } else {
+        alert("Senha incorreta!");
+      }
+
+      fecharMenu();
+    }
+
+    // FECHAR MENU
+    function fecharMenu() {
+      menu.classList.remove("aberto");
+      botaoMenu.textContent = "☰";
+    }
+
+    // BOTÃO MENU
+    botaoMenu.onclick = () => {
+      menu.classList.toggle("aberto");
+      botaoMenu.textContent = menu.classList.contains("aberto") ? "✖" : "☰";
+    };
+
+    // ANIMAÇÕES AO CARREGAR
+    window.onload = () => {
+      setTimeout(() => {
+        topo.classList.add("ativo");
+        imagem.classList.add("ativo");
+        menu.classList.add("ativo");
+        botaoMenu.classList.add("ativo");
+      }, 100);
+
+      setTimeout(() => {
+        titulo.classList.add("ativo");
+      }, 300);
+    };
+  </script>
+
+</body>
+</html>
