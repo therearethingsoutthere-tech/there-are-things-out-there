@@ -1,304 +1,291 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BWCAA Company</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BWCAA Company</title>
 
-<style
-  @font-face {
-  font-family: "Brunson";
-  src: url("fonts/Brunson-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
+  <style>
+    @font-face {
+      font-family: "Brunson";
+      src: url("fonts/Brunson-Regular.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+    }
 
-@font-face {
-  font-family: "Brunson";
-  src: url("fonts/Brunson-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
+    @font-face {
+      font-family: "Brunson";
+      src: url("fonts/Brunson-Bold.otf") format("opentype");
+      font-weight: 700;
+      font-style: normal;
+    }
 
-/* RESET E BASE */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    /* RESET */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  font-family: brunson;
-  background-color: white;
-  overflow-x: hidden;
-}
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: Brunson, Arial, sans-serif;
+      background-color: white;
+      overflow-x: hidden;
+    }
 
-/* TOPO */
-.topo {
-  height: 40vh; /* altura proporcional à tela */
-  min-height: 250px;
-  background-color: #00008B;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(-100%);
-  transition: transform 2s ease-out;
-}
+    /* TOPO */
+    .topo {
+      height: 40vh;
+      min-height: 250px;
+      background-color: #00008B;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-100%);
+      transition: transform 2s ease-out;
+    }
 
-/* TÍTULO */
-.titulo {
-  color: white;
-  font-size: brunson(36px, 8vw, 80px); /* responsivo entre 36px e 80px */
-  font-weight: bold;
-  letter-spacing: 2px;
-  opacity: 0;
-  transform: translateY(-120px);
-  transition: transform 2s ease-out, opacity 2s ease-out;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 0 10px;
-}
+    /* TÍTULO */
+    .titulo {
+      color: white;
+      font-size: clamp(36px, 8vw, 80px);
+      font-weight: bold;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(-120px);
+      transition: transform 2s ease-out, opacity 2s ease-out;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0 10px;
+    }
 
-/* IMAGEM NO CANTO */
-.imagem-canto {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 120px;
-  max-width: 25%;
-  transform: translateY(-100%);
-  transition: transform 2s ease-out;
-  z-index: 1000;
-}
+    /* IMAGEM */
+    .imagem-canto {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 120px;
+      max-width: 25%;
+      transform: translateY(-100%);
+      transition: transform 2s ease-out;
+      z-index: 1000;
+    }
 
-/* BOTÃO MENU */
-.botao-menu {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #00008B;
-  color: white;
-  padding: 10px 15px;
-  cursor: pointer;
-  border: none;
-  font-size: brunson(16px, 4vw, 22px);
-  z-index: 1100;
-  border-radius: 5px;
-  transform: translateY(-100%);
-  transition: transform 2s ease-out;
-}
+    /* BOTÃO MENU */
+    .botao-menu {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #00008B;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      border: none;
+      font-size: clamp(16px, 4vw, 22px);
+      z-index: 1100;
+      border-radius: 5px;
+      transform: translateY(-100%);
+      transition: transform 2s ease-out;
+    }
 
-/* MENU LATERAL */
-.menu-lateral {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  max-width: 70%;
-  height: 100%;
-  background-color: #1E1E1E;
-  padding-top: 60px;
-  transition: left 0.5s ease;
-  z-index: 1050;
-}
+    /* MENU */
+    .menu-lateral {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      max-width: 70%;
+      height: 100%;
+      background-color: #1E1E1E;
+      padding-top: 60px;
+      transition: left 0.5s ease;
+      z-index: 1050;
+    }
 
-.menu-lateral.aberto { left: 0; }
+    .menu-lateral.aberto {
+      left: 0;
+    }
 
-.menu-lateral a {
-  display: block;
-  padding: 15px 25px;
-  color: white;
-  text-decoration: none;
-  font-size: brunson(14px, 4vw, 18px);
-  cursor: pointer;
-}
+    .menu-lateral a {
+      display: block;
+      padding: 15px 25px;
+      color: white;
+      text-decoration: none;
+      font-size: clamp(14px, 4vw, 18px);
+      cursor: pointer;
+    }
 
-.menu-lateral a:hover {
-  background-color: #00008B;
-}
+    .menu-lateral a:hover {
+      background-color: #00008B;
+    }
 
-/* CONTEÚDO INICIAL */
-.conteudo-inicial {
-  padding: 50px 10%;
-  background-color: white;
-  opacity: 0;
-  animation: fadeInTexto 2s ease forwards;
-  animation-delay: 1.5s;
-}
+    /* CONTEÚDO */
+    .conteudo-inicial {
+      padding: 50px 10%;
+      background-color: white;
+      opacity: 0;
+      animation: fadeInTexto 2s ease forwards;
+      animation-delay: 1.5s;
+    }
 
-.conteudo-inicial p {
-  max-width: 1000px;
-  margin: auto;
-  font-size: brunson(14px, 2vw, 18px);
-  line-height: 1.7;
-  color: #222;
-  text-align: justify;
-}
+    .conteudo-inicial p {
+      max-width: 1000px;
+      margin: auto;
+      font-size: clamp(14px, 2vw, 18px);
+      line-height: 1.7;
+      color: #222;
+      text-align: justify;
+    }
 
-/* ANIMAÇÃO TEXTO */
-@keyframes fadeInTexto {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    @keyframes fadeInTexto {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-/* CLASSES ATIVAS */
-.topo.ativo { transform: translateY(0); }
-.titulo.ativo { opacity: 1; transform: translateY(0); }
-.imagem-canto.ativo { transform: translateY(0); }
-.botao-menu.ativo { transform: translateY(0); }
+    .topo.ativo { transform: translateY(0); }
+    .titulo.ativo { opacity: 1; transform: translateY(0); }
+    .imagem-canto.ativo { transform: translateY(0); }
+    .botao-menu.ativo { transform: translateY(0); }
 
-/* RESPONSIVO ADICIONAL */
-@media (max-width: 600px) {
-  .topo { height: 30vh; }
-  .conteudo-inicial { padding: 30px 5%; }
-  .imagem-canto { width: 80px; }
-}
-</style>
+    @media (max-width: 600px) {
+      .topo { height: 30vh; }
+      .conteudo-inicial { padding: 30px 5%; }
+      .imagem-canto { width: 80px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- TOPO -->
-<div class="topo" id="topo">
-  <div class="titulo" id="titulo">BWCAA Company</div>
-</div>
+  <div class="topo" id="topo">
+    <div class="titulo" id="titulo">BWCAA Company</div>
+  </div>
 
-<!-- TEXTO INICIAL -->
-<div class="conteudo-inicial">
-  <p>
-    BWCAA Corporation was established across the Americas, maintaining
-    operational presence in regions including Mexico, the United StaTes,
-    Brazil, Chile, and Argentina.<br><br>
+  <div class="conteudo-inicial">
+    <p>
+      BWCAA Corporation was established across the Americas, maintaining
+      operational presence in regions including Mexico, the United States,
+      Brazil, Chile, and Argentina.<br><br>
 
-    THe corporatIon waS founded with the Primary objective of overseeing,
-    controLling, And exeCuting thE dIsposal of Specialized biological and
-    hazardous waste under strict regulatory, scientific, and security
-    Protocols.<br><br>
+      The corporation was founded with the primary objective of overseeing,
+      controlling, and executing the disposal of specialized biological and
+      hazardous waste under strict regulatory, scientific, and security
+      protocols.<br><br>
 
-    At the present time, all BWCAA corporate facilities containing residential,
-    containment, or classified operational sectors are designated as strictly
-    restricted areas. Access is granted exclusively to authorized personnel
-    or individuals operating Under official goveRnmental, military, or
-    judicial mandatE.<br><br>
+      All BWCAA corporate facilities containing residential, containment,
+      or classified operational sectors are designated as strictly restricted
+      areas. Access is granted exclusively to authorized personnel or individuals
+      operating under official governmental, military, or judicial mandate.<br><br>
 
-    Any unauthorized access, breach of protocol, or attempt to obtain
-    restricted information is considered a violation of corporate and
-    international regulations and may result in legal consequences.
-    For further institutional, historical, and operational details regarding
-    BWCAA Corporation, please refer to the History section.
-  </p>
-</div>
+      Any unauthorized access or attempt to obtain restricted information
+      constitutes a violation of international regulations.
+    </p>
+  </div>
 
-<!-- IMAGEM -->
-<img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
+  <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
-<!-- BOTÃO MENU -->
-<button class="botao-menu" id="botao-menu">☰</button>
+  <button class="botao-menu" id="botao-menu">☰</button>
 
-<!-- MENU -->
-<div class="menu-lateral" id="menu">
-  <a onclick="abrirPagina('BWCAA Company')">Home</a>
-  <a onclick="abrirFuncionarios()"> area de Funcionários</a>
-  <a onclick="abrirPagina('History')">History</a>
-</div>
+  <div class="menu-lateral" id="menu">
+    <a onclick="abrirPagina('BWCAA Company')">Home</a>
+    <a onclick="abrirFuncionarios()">Área de Funcionários</a>
+    <a onclick="abrirPagina('History')">History</a>
+  </div>
 
-<script>
-const topo = document.getElementById("topo");
-const titulo = document.getElementById("titulo");
-const imagem = document.getElementById("imagem");
-const botaoMenu = document.getElementById("botao-menu");
-const menu = document.getElementById("menu");
+  <script>
+    const topo = document.getElementById("topo");
+    const titulo = document.getElementById("titulo");
+    const imagem = document.getElementById("imagem");
+    const botaoMenu = document.getElementById("botao-menu");
+    const menu = document.getElementById("menu");
 
-/* ANIMAÇÕES */
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    topo.classList.add("ativo");
-    imagem.classList.add("ativo");
-    botaoMenu.classList.add("ativo");
-  }, 100);
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        topo.classList.add("ativo");
+        imagem.classList.add("ativo");
+        botaoMenu.classList.add("ativo");
+      }, 100);
 
-  setTimeout(() => {
-    titulo.classList.add("ativo");
-  }, 300);
-});
+      setTimeout(() => {
+        titulo.classList.add("ativo");
+      }, 300);
+    });
 
-/* MENU */
-botaoMenu.onclick = () => {
-  menu.classList.toggle("aberto");
-  botaoMenu.textContent = menu.classList.contains("aberto") ? "✖" : "☰";
-};
+    botaoMenu.onclick = () => {
+      menu.classList.toggle("aberto");
+      botaoMenu.textContent = menu.classList.contains("aberto") ? "✖" : "☰";
+    };
 
-function abrirPagina(nome) {
-  titulo.textContent = nome;
-  fecharMenu();
-}
-
-function fecharMenu() {
-  menu.classList.remove("aberto");
-  botaoMenu.textContent = "☰";
-}
-
-/* FUNCIONÁRIOS (continua ARG-style) */
-function abrirFuncionarios() {
-  const entrada = prompt("Digite a senha:");
-  if (!entrada) return;
-
-  function gerarValor(txt) {
-    let v = 0;
-    for (let i = 0; i < txt.length; i++) {
-      v += txt.charCodeAt(i) * (i + 7);
+    function abrirPagina(nome) {
+      titulo.textContent = nome;
+      fecharMenu();
     }
-    return (v ^ 4096) + 123;
-  }
 
-  const valorCorreto = gerarValor("50901");
+    function fecharMenu() {
+      menu.classList.remove("aberto");
+      botaoMenu.textContent = "☰";
+    }
 
-  if (gerarValor(entrada) === valorCorreto) {
-    const aba = window.open("", "_blank");
-    aba.document.write(`
-      <!DOCTYPE 
-      <html>
-      <htmllang="pt-BR">
+    function abrirFuncionarios() {
+      const entrada = prompt("Digite a senha:");
+      if (!entrada) return;
+
+      function gerarValor(txt) {
+        let v = 0;
+        for (let i = 0; i < txt.length; i++) {
+          v += txt.charCodeAt(i) * (i + 7);
+        }
+        return (v ^ 4096) + 123;
+      }
+
+      const valorCorreto = gerarValor("50901");
+
+      if (gerarValor(entrada) === valorCorreto) {
+        const aba = window.open("", "_blank");
+        aba.document.write(`
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <head>
-        <title>Restricted Area</title>
-        <style>
-          body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-colo: white;
-            color: white;
-            font-family: brunson;
-            font-size: 60px;
-            font-weight: bold;
-            text-align: center;
-          }
-        </style>
-      </head>
-      <body>TESTE</body>
-      </html>
-    `);
-    aba.document.close();
-  } else {
-    alert("Access denied.");
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restricted Area</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #00008B;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 60px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  TESTE
+</body>
+</html>
+        `);
+        aba.document.close();
+      } else {
+        alert("Access denied.");
+      }
 
-  fecharMenu();
-}
-</script>
+      fecharMenu();
+    }
+  </script>
 
 </body>
 </html>
