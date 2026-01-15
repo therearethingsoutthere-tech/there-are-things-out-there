@@ -71,13 +71,6 @@
 
     .botao-menu.ativo { transform: translateY(0); }
 
-    .botao-menu span {
-      display: inline-block;
-      transition: transform 0.4s ease;
-    }
-
-    .botao-menu.aberto span { transform: rotate(90deg); }
-
     .menu-lateral {
       position: fixed;
       top: 0;
@@ -117,11 +110,8 @@
 
   <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
-  <button class="botao-menu" id="botao-menu">
-    <span>☰</span>
-  </button>
+  <button class="botao-menu" id="botao-menu">☰</button>
 
-  <!-- MENU -->
   <div class="menu-lateral" id="menu-lateral">
     <a onclick="abrirPagina('BWCAA Company')">Home</a>
     <a onclick="abrirFuncionarios()">Funcionários</a>
@@ -132,99 +122,19 @@
     function abrirPagina(nome) {
       document.getElementById("titulo").textContent = nome;
       fecharMenu();
-      history.pushState({}, "", "?pagina=" + nome.toLowerCase());
     }
 
-    async function abrirFuncionarios() {
-      const senhaInput = prompt("Digite a senha para acessar a área de funcionários:");
-      if (!senhaInput) return;
+    function abrirFuncionarios() {
+      const senha = prompt("Digite a senha:");
 
-      async function gerarHash(texto) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(texto);
-        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-      }
+      if (!senha) return;
 
-      /* 🔐 HASH SHA-256 CORRETO DA SENHA 50901 */
-      const senhaHashCorreta =
-        "9a8b1f16c7b27b8e9f1b4ed5a8bbf6e1a3c1f7e77b3aef8a0cbbd6f6c6c8d4c2";
+      // 🔐 senha ofuscada (50901)
+      const chave = String.fromCharCode(53,48,57,48,49);
 
-      const hashDigitado = await gerarHash(senhaInput);
-
-      if (hashDigitado === senhaHashCorreta) {
-        const novaAba = window.open("", "_blank");
-        novaAba.document.write(`
+      if (senha === chave) {
+        const aba = window.open("", "_blank");
+        aba.document.write(`
           <!DOCTYPE html>
           <html lang="pt-BR">
           <head>
-            <meta charset="UTF-8">
-            <title>Funcionários</title>
-            <style>
-              body {
-                margin: 0;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background: #00008B;
-                color: white;
-                font-family: Arial, sans-serif;
-                font-size: 60px;
-                font-weight: bold;
-              }
-            </style>
-          </head>
-          <body>
-            TESTE
-          </body>
-          </html>
-        `);
-        novaAba.document.close();
-      } else {
-        alert("Senha incorreta!");
-      }
-
-      fecharMenu();
-    }
-
-    function fecharMenu() {
-      const menu = document.getElementById("menu-lateral");
-      const botao = document.getElementById("botao-menu");
-      menu.classList.remove("aberto");
-      botao.classList.remove("aberto");
-      botao.querySelector("span").textContent = "☰";
-    }
-
-    window.onload = () => {
-      const topo = document.getElementById("topo");
-      const titulo = document.getElementById("titulo");
-      const imagem = document.getElementById("imagem");
-      const botaoMenu = document.getElementById("botao-menu");
-      const menuLateral = document.getElementById("menu-lateral");
-
-      setTimeout(() => {
-        topo.classList.add("ativo");
-        imagem.classList.add("ativo");
-        menuLateral.classList.add("ativo");
-        botaoMenu.classList.add("ativo");
-      }, 100);
-
-      setTimeout(() => {
-        titulo.classList.add("ativo");
-      }, 300);
-    };
-
-    document.getElementById("botao-menu").onclick = () => {
-      const menu = document.getElementById("menu-lateral");
-      const botao = document.getElementById("botao-menu");
-      menu.classList.toggle("aberto");
-      botao.classList.toggle("aberto");
-      botao.querySelector("span").textContent =
-        menu.classList.contains("aberto") ? "✖" : "☰";
-    };
-  </script>
-
-</body>
-</html>
