@@ -97,23 +97,68 @@ html, body {
 .menu-lateral a:hover {
   background-color: #00008B;
 }
+
+/* CONTEÚDO INICIAL */
+.conteudo-inicial {
+  padding: 60px 80px;
+  background-color: white;
+}
+
+.conteudo-inicial p {
+  max-width: 1000px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #222;
+  text-align: justify;
+}
 </style>
 </head>
 
 <body>
 
+<!-- TOPO -->
 <div class="topo" id="topo">
   <div class="titulo" id="titulo">BWCAA Company</div>
 </div>
 
+<!-- TEXTO INICIAL -->
+<div class="conteudo-inicial">
+  <p>
+    BWCAA Corporation was established across the Americas, maintaining
+    operational presence in regions including Mexico, the United States,
+    Brazil, Chile, and Argentina.<br><br>
+
+    The corporation was founded with the primary objective of overseeing,
+    controlling, and executing the disposal of specialized biological and
+    hazardous waste under strict regulatory, scientific, and security
+    protocols.<br><br>
+
+    At the present time, all BWCAA corporate facilities containing residential,
+    containment, or classified operational sectors are designated as strictly
+    restricted areas. Access is granted exclusively to authorized personnel
+    or individuals operating under official governmental, military, or
+    judicial mandate.<br><br>
+
+    Any unauthorized access, breach of protocol, or attempt to obtain
+    restricted information is considered a violation of corporate and
+    international regulations and may result in legal consequences.
+    For further institutional, historical, and operational details regarding
+    BWCAA Corporation, please refer to the History section.
+  </p>
+</div>
+
+<!-- IMAGEM -->
 <img src="BWCAA-removebg-preview.png" class="imagem-canto" id="imagem">
 
+<!-- BOTÃO MENU -->
 <button class="botao-menu" id="botao-menu">☰</button>
 
+<!-- MENU -->
 <div class="menu-lateral" id="menu">
   <a onclick="abrirPagina('BWCAA Company')">Home</a>
   <a onclick="abrirFuncionarios()">Funcionários</a>
-  <a onclick="abrirPagina('História')">História</a>
+  <a onclick="abrirPagina('History')">History</a>
 </div>
 
 <script>
@@ -152,31 +197,28 @@ function fecharMenu() {
   botaoMenu.textContent = "☰";
 }
 
-/* 🔐 VERIFICAÇÃO (SEM NÚMERO ERRADO) */
+/* FUNCIONÁRIOS (continua ARG-style) */
 function abrirFuncionarios() {
   const entrada = prompt("Digite a senha:");
   if (!entrada) return;
 
-  // função de verificação
-  function gerarValor(texto) {
+  function gerarValor(txt) {
     let v = 0;
-    for (let i = 0; i < texto.length; i++) {
-      v += texto.charCodeAt(i) * (i + 7);
+    for (let i = 0; i < txt.length; i++) {
+      v += txt.charCodeAt(i) * (i + 7);
     }
     return (v ^ 4096) + 123;
   }
 
-  // valor CORRETO gerado a partir da senha real
   const valorCorreto = gerarValor("50901");
 
   if (gerarValor(entrada) === valorCorreto) {
     const aba = window.open("", "_blank");
     aba.document.write(`
       <!DOCTYPE html>
-      <html lang="pt-BR">
+      <html>
       <head>
-        <meta charset="UTF-8">
-        <title>Funcionários</title>
+        <title>Restricted Area</title>
         <style>
           body {
             margin: 0;
@@ -197,7 +239,7 @@ function abrirFuncionarios() {
     `);
     aba.document.close();
   } else {
-    alert("Acesso negado.");
+    alert("Access denied.");
   }
 
   fecharMenu();
